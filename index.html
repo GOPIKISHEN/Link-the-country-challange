@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Link Challenge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Country Link Challenge</h1>
+
+        <div class="target-display">
+            <p>From: <span id="start-country" class="country-name">Loading...</span></p>
+            <p>To: <span id="end-country" class="country-name">Loading...</span></p>
+        </div>
+         <div class="globe-area">
+            <div id="globe-viz"></div> <p class="current-country-on-globe">Current: <span id="current-country-display">---</span></p>
+        </div>
+
+        <div class="controls">
+            <input type="text" id="country-input" placeholder="Guess the next bordering country">
+            <button id="submit-guess">Submit</button>
+            <p id="message" class="message"></p>
+        </div>
+
+        <div class="game-info">
+            <div class="lives-display">Lives: <span id="lives-count">5</span></div>
+            <div class="path-history">
+                <h2>Your Path:</h2>
+                <ul id="path-list">
+                    </ul>
+            </div>
+        </div>
+        
+        <button id="new-game">New Game</button>
+    </div>
+
+    <script src="https://unpkg.com/globe.gl"></script>
+    <script src="script.js"></script>
+</body>
+</html>

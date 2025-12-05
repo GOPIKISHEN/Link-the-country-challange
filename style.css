@@ -1,0 +1,277 @@
+/* Global Reset and Body Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298); /* Deep Blue Gradient */
+    color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow: hidden; /* Prevent body scroll if globe is large */
+}
+
+.game-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Modern shadow effect */
+    max-width: 900px; /* Wider to accommodate globe */
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "target target"
+        "globe controls"
+        "globe gameinfo"
+        "newgame newgame";
+    grid-template-columns: 1.2fr 1fr; /* Globe wider than controls/info */
+    gap: 20px;
+    align-items: start;
+}
+
+h1 {
+    grid-area: header;
+    margin-bottom: 0;
+    color: #ffffff;
+    font-size: 2.2em;
+    text-align: center;
+}
+
+/* Target Display Styling */
+.target-display {
+    grid-area: target;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0;
+}
+
+.country-name {
+    font-weight: bold;
+    color: #a8dadc; /* Light Blue Accent */
+}
+
+/* Globe Area */
+.globe-area {
+    grid-area: globe;
+    position: relative;
+    width: 100%; /* Adjust as needed */
+    height: 450px; /* Fixed height for the globe */
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.3); /* Dark background for globe */
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+    margin-top: 10px;
+}
+
+#globe-viz {
+    width: 100%;
+    height: 100%;
+}
+
+.current-country-on-globe {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+#current-country-display {
+    font-weight: bold;
+    color: #a8dadc;
+}
+
+/* Controls and Input */
+.controls {
+    grid-area: controls;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#country-input {
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+    color: #333;
+}
+
+#submit-guess {
+    padding: 10px 15px;
+    border: none;
+    background-color: #e63946; /* Red Accent */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#submit-guess:hover {
+    background-color: #c0303b;
+}
+
+#new-game {
+    grid-area: newgame;
+    display: block;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #457b9d; /* Secondary Blue Accent */
+    padding: 12px 20px;
+    font-size: 1.1em;
+    width: fit-content;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#new-game:hover {
+    background-color: #3b6b88;
+}
+
+/* Message Display */
+.message {
+    margin-top: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    min-height: 20px;
+}
+
+.message.success {
+    color: #a8dadc;
+}
+
+.message.error {
+    color: #ffb703; /* Warning Yellow */
+}
+
+/* Game Info (Lives & Path) */
+.game-info {
+    grid-area: gameinfo;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.lives-display {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    color: #f1faee;
+}
+
+#lives-count {
+    color: #e63946; /* Red for lives */
+}
+
+/* Path List Styling */
+.path-history {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    max-height: 200px; /* Fixed height for scrolling */
+    overflow-y: auto; /* Enable scrolling */
+}
+
+.path-history h2 {
+    margin-bottom: 10px;
+    text-align: left;
+    color: #ffffff;
+    font-size: 1.3em;
+}
+
+#path-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+#path-list li {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 8px 15px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border-left: 3px solid #457b9d; /* Blue border */
+    font-size: 0.95em;
+}
+
+/* Scrollbar styles for path-history */
+.path-history::-webkit-scrollbar {
+    width: 8px;
+}
+.path-history::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+.path-history::-webkit-scrollbar-thumb {
+    background: #457b9d;
+    border-radius: 10px;
+}
+.path-history::-webkit-scrollbar-thumb:hover {
+    background: #3b6b88;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .game-container {
+        grid-template-areas:
+            "header"
+            "target"
+            "globe"
+            "controls"
+            "gameinfo"
+            "newgame";
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .globe-area {
+        height: 300px; /* Smaller globe on smaller screens */
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .target-display p {
+        font-size: 0.9em;
+    }
+
+    #country-input, #submit-guess, #new-game {
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+
+    .lives-display {
+        font-size: 1.1em;
+    }
+
+    .path-history h2 {
+        font-size: 1.1em;
+    }
+
+    #path-list li {
+        font-size: 0.85em;
+    }
+}
